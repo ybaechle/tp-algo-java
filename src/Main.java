@@ -1,15 +1,68 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Entrez le numéro de l'exercice à exécuter :");
+        int numExo = scanner.nextInt();
+        start(numExo);
+    }
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+    public static void start(int numExo) {
+        switch (numExo) {
+            case 1:
+                exercise1();
+                break;
+            default:
+                System.out.println("Numéro d'exercice invalide");
+                break;
+        }
+    }
+
+    public static void exercise1() {
+        Scanner scanner = new Scanner(System.in);
+        int a , b , c;
+
+        // Saisir les coefficients a, b, c
+        System.out.println("Entrez la valeur de a (doit être un entier non nul) : ");
+        while (!scanner.hasNextInt() || (a = scanner.nextInt()) == 0) {
+            System.out.println("a doit être un nombre entier non nul. Veuillez réessayer : ");
+            scanner.nextLine(); // Effacer l'entrée non valide
+        }
+
+        System.out.println("Entrez la valeur de b : ");
+        while (!scanner.hasNextInt()) {
+            System.out.println("b doit être un nombre entier. Veuillez réessayer : ");
+            scanner.nextLine();
+        }
+        b = scanner.nextInt();
+
+        System.out.println("Entrez la valeur de c : ");
+        while (!scanner.hasNextInt()) {
+            System.out.println("c doit être un nombre entier. Veuillez réessayer : ");
+            scanner.nextLine();
+        }
+        c = scanner.nextInt();
+
+        // Calcul du discriminant
+        int delta = b * b - 4 * a * c;
+        double sqrtDelta = Math.sqrt(delta);
+
+        System.out.println("Equation: " + a + "x^2 + " + b + "x + " + c + " = 0");
+
+        if (delta > 0) {
+            // Deux solutions réelles et distinctes
+            double x1 = (-b + sqrtDelta) / (2 * a);
+            double x2 = (-b - sqrtDelta) / (2 * a);
+            System.out.println("L'équation a deux solutions réelles et distinctes : x1 = " + x1 + ", x2 = " + x2);
+        } else if (delta == 0) {
+            // Une seule solution réelle
+            double x =  (double) -b / (2 * a);
+
+            System.out.println("L'équation a une solution réelle : x = " + x);
+        } else {
+            // Pas de solution réelle
+            System.out.println("L'équation n'a pas de solutions réelles.");
         }
     }
 }
