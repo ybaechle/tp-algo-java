@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -16,6 +17,9 @@ public class Main {
             case 2:
                 exercise2();
                 break;
+            case 3:
+                exercise3();
+                break;
             default:
                 System.out.println("Numéro d'exercice invalide");
                 break;
@@ -23,6 +27,10 @@ public class Main {
     }
 
     public static void exercise1() {
+        System.out.println("**********************************");
+        System.out.println("*   Lancement de l'exercice 1    *");
+        System.out.println("**********************************");
+
         Scanner scanner = new Scanner(System.in);
         int a, b, c;
 
@@ -72,7 +80,12 @@ public class Main {
         scanner.close();
     }
 
+
     public static void exercise2() {
+        System.out.println("**********************************");
+        System.out.println("*   Lancement de l'exercice 2    *");
+        System.out.println("**********************************");
+
         Scanner scanner = new Scanner(System.in);
         int x = 0, y = 0;
 
@@ -102,4 +115,54 @@ public class Main {
 
     }
 
+
+    public static void exercise3() {
+        System.out.println("**********************************");
+        System.out.println("*   Lancement de l'exercice 3    *");
+        System.out.println("**********************************");
+
+        // Déclaration et initialisation d'un tableau de 10 entiers
+        int[] tabEntiers = {15, -5, 8, 1, -10, 3, 20, 0, 6, 12};
+
+        // Tri et affichage du tableau trié
+        Arrays.sort(tabEntiers);
+        System.out.println("Tableau après le tri : " + Arrays.toString(tabEntiers));
+
+        // Valeur à rechercher
+        System.out.println("Veuillez entrer le nombre à rechercher : ");
+        Scanner scanner = new Scanner(System.in);
+        int x = scanner.nextInt();
+
+        // Recherche de la valeur x dans le tableau
+        int position = rechercherEntier(tabEntiers, x);
+
+        // Affichage du résultat de la recherche
+        if (position != -1) {
+            System.out.println("La valeur " + x + " se trouve à la position " + position + " en partant de l'indice 0 du tableau.");
+        } else {
+            System.out.println("La valeur " + x + " n'existe pas dans le tableau.");
+        }
+    }
+
+    // Fonction de recherche dichotomique
+    public static int rechercherEntier(int[] tab, int x) {
+        int gauche = 0;
+        int droite = tab.length - 1;
+
+        while (gauche <= droite) {
+            int milieu = (gauche + droite) / 2;
+
+            if (tab[milieu] == x) {
+                return milieu; // Élément trouvé
+            } else if (tab[milieu] < x) {
+                gauche = milieu + 1;
+            } else {
+                droite = milieu - 1;
+            }
+        }
+
+        return -1; // Élément non trouvé
+    }
 }
+
+
