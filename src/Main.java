@@ -26,11 +26,18 @@ public class Main {
             case 5:
                 exercise5();
                 break;
+            case 6:
+                exercise6();
+                break;
+            case 7:
+                exercise7();
+                break;
             default:
                 System.out.println("Numéro d'exercice invalide");
                 break;
         }
     }
+
 
     public static void exercise1() {
         System.out.println("**********************************");
@@ -116,6 +123,15 @@ public class Main {
         scanner.close();
     }
 
+    /**
+     * Calcule la puissance d'un entier x élevé à un entier y.
+     * Cette méthode utilise la fonction `Math.pow` pour calculer la valeur de x élevé à la puissance y.
+     * Le résultat est converti en long pour éviter les pertes de précision liées aux grandes valeurs.
+     *
+     * @param x la base, un entier
+     * @param y l'exposant, un entier
+     * @return le résultat de x^y en tant que long
+     */
     private static long puissance(int x, int y) {
         return (long) Math.pow(x, y);
 
@@ -150,7 +166,16 @@ public class Main {
         }
     }
 
-    // Fonction de recherche dichotomique
+    /**
+     * Recherche un entier dans un tableau trié en utilisant l'algorithme de recherche dichotomique.
+     * Cette méthode effectue une recherche dichotomique (ou recherche binaire) pour trouver la position d'un entier donné
+     * dans un tableau trié d'entiers. Si l'entier est trouvé, l'index de l'élément est retourné. Sinon, la méthode retourne -1.
+     * Le tableau doit être trié au préalable pour que la recherche fonctionne correctement.
+     *
+     * @param tab le tableau trié d'entiers dans lequel effectuer la recherche
+     * @param x   l'entier à rechercher
+     * @return l'index de l'entier recherché dans le tableau, ou -1 si l'entier n'est pas trouvé
+     */
     private static int rechercherEntier(int[] tab, int x) {
         int gauche = 0;
         int droite = tab.length - 1;
@@ -176,6 +201,57 @@ public class Main {
         System.out.println("*   Lancement de l'exercice 4    *");
         System.out.println("**********************************");
 
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Veuillez renseigner la taille du tableau : ");
+        int TAILLE_MAX = scanner.nextInt();
+
+        int[] tableau = new int[TAILLE_MAX];
+
+        // Remplissage du tableau avec des valeurs aléatoires positives et négatives comprises entre -500 et 499
+        for (int i = 0; i < TAILLE_MAX; i++) {
+            tableau[i] = (int) (Math.random() * 1000) - 500;
+        }
+
+        // Affichage des valeurs du tableau
+        System.out.println("Contenu du tableau : " + Arrays.toString(tableau));
+
+        // Recherche de la plus grande valeur dans le tableau
+        int max = lireMaxTabEntiers(tableau);
+        System.out.println("La plus grande valeur dans le tableau est : " + max);
+
+        scanner.close();
+    }
+
+    /**
+     * Trouve et retourne la plus grande valeur dans un tableau d'entiers.
+     * Cette méthode parcourt un tableau d'entiers donné pour trouver la valeur maximale.
+     * La recherche commence avec la première valeur du tableau comme valeur initiale de `max`,
+     * et compare chaque élément à l'itération suivante pour déterminer s'il est plus grand que le `max` actuel.
+     *
+     * @param tab le tableau d'entiers dans lequel rechercher la valeur maximale
+     * @return la plus grande valeur trouvée dans le tableau
+     * @throws IllegalArgumentException si le tableau est vide
+     */
+    private static int lireMaxTabEntiers(int[] tab) {
+        // Initialiser max avec la première valeur du tableau
+        int max = tab[0];
+
+        for (int i = 1; i < tab.length; i++) {
+            if (tab[i] > max) {
+                max = tab[i];
+            }
+        }
+
+        return max;
+    }
+
+
+    public static void exercise5() {
+        System.out.println("**********************************");
+        System.out.println("*   Lancement de l'exercice 5    *");
+        System.out.println("**********************************");
+
         String choice;
 
         do {
@@ -183,6 +259,16 @@ public class Main {
         } while (choice.equalsIgnoreCase("y"));
     }
 
+    /**
+     * Génère un tableau de multiplication et permet à l'utilisateur de trouver le produit de deux nombres.
+     * Cette méthode crée un tableau de multiplication de taille définie par les constantes LIGNES et COLONNES.
+     * Les produits des nombres de 1 à 9 sont stockés dans le tableau, avec l'index 0 des lignes et colonnes ignoré.
+     * L'utilisateur est invité à entrer deux entiers, X et Y, pour obtenir le produit correspondant de X et Y
+     * dans le tableau de multiplication. La méthode demande ensuite à l'utilisateur s'il souhaite relancer
+     * le programme pour un autre calcul.
+     *
+     * @return une chaîne indiquant si l'utilisateur souhaite effectuer un autre calcul ("y" pour oui, "n" pour non)
+     */
     private static String calculProduit() {
         // Définition des constantes pour le nombre de lignes et de colonnes
         final int LIGNES = 10;
@@ -248,9 +334,9 @@ public class Main {
     }
 
 
-    public static void exercise5() {
+    public static void exercise6() {
         System.out.println("**********************************");
-        System.out.println("*   Lancement de l'exercice 5    *");
+        System.out.println("*   Lancement de l'exercice 6    *");
         System.out.println("**********************************");
 
         Scanner scanner = new Scanner(System.in);
@@ -285,7 +371,7 @@ public class Main {
         int[] tableauTrie = switch (choice) {
             case "asc" -> trierTableau(tableau, true);
             case "desc" -> trierTableau(tableau, false);
-            default ->tableau;
+            default -> tableau;
         };
 
         // Affichage des valeurs du tableau après tri
@@ -294,7 +380,16 @@ public class Main {
         scanner.close();
     }
 
-    // Déclaration de la fonction trierTableau() utilisant le tri par insertion
+    /**
+     * Trie un tableau d'entiers en ordre croissant ou décroissant selon le paramètre spécifié.
+     * Cette méthode utilise l'algorithme de tri par insertion pour trier le tableau d'entiers fourni.
+     * L'ordre de tri est déterminé par le paramètre `asc`. Si `asc` est vrai, le tableau est trié
+     * en ordre croissant, sinon il est trié en ordre décroissant.
+     *
+     * @param tab le tableau d'entiers à trier
+     * @param asc un booléen spécifiant l'ordre de tri; vrai pour un tri croissant, faux pour un tri décroissant
+     * @return le tableau trié
+     */
     private static int[] trierTableau(int[] tab, boolean asc) {
         for (int i = 1; i < tab.length; i++) {
             int current = tab[i];
@@ -308,6 +403,75 @@ public class Main {
             tab[j] = current;
         }
         return tab;
+    }
+
+
+    public static void exercise7() {
+        System.out.println("**********************************");
+        System.out.println("*   Lancement de l'exercice 7    *");
+        System.out.println("**********************************");
+
+        String operation;
+        Scanner scanner = new Scanner(System.in);
+
+        // Demander à l'utilisateur le type d'opération souhaitée
+        while (true) {
+            System.out.println("Veuillez choisir votre opération (+, -, *, /) : ");
+            operation = scanner.nextLine();
+            if (operation.equals("+") || operation.equals("-") || operation.equals("*") || operation.equals("/")) {
+                break;
+            } else {
+                System.out.println("Opération invalide. Veuillez entrer l'une des opérations suivantes : +, -, *, /");
+            }
+        }
+
+        // Demander les 2 valeurs à l'utilisateur
+        System.out.println("Veuillez entrer la valeur de x : ");
+        int x = scanner.nextInt();
+        System.out.println("Veuillez entrer la valeur de y : ");
+        int y = scanner.nextInt();
+
+        scanner.close();
+
+        // Calcul et affichage du résultat
+        calculer(x, y, operation);
+    }
+
+    /**
+     * Effectue une opération arithmétique sur deux entiers et affiche le résultat.
+     *
+     * @param x         le premier entier
+     * @param y         le deuxième entier
+     * @param operation une chaîne spécifiant l'opération à effectuer ("+", "-", "*", "/")
+     */
+    private static void calculer(int x, int y, String operation) {
+        int resultat;
+
+        switch (operation) {
+            case "+":
+                resultat = x + y;
+                break;
+            case "-":
+                resultat = x - y;
+                break;
+            case "*":
+                resultat = x * y;
+                break;
+            case "/":
+                if (y != 0) {
+                    resultat = x / y;
+                } else {
+                    System.out.println("La division par 0 est interdite !");
+                    return; // Sortir de la méthode pour éviter l'affichage du résultat
+                }
+                break;
+            default:
+                System.out.println("Opération invalide.");
+                return; // Sortir de la méthode car l'opération est invalide
+        }
+
+        // Affichage du résultat si l'opération est valide
+        System.out.println("Le résultat de " + x + " " + operation + " " + y + " = " + resultat);
     }
 }
 
