@@ -20,6 +20,9 @@ public class Main {
             case 3:
                 exercise3();
                 break;
+            case 4:
+                exercise4();
+                break;
             default:
                 System.out.println("Numéro d'exercice invalide");
                 break;
@@ -163,6 +166,80 @@ public class Main {
 
         return -1; // Élément non trouvé
     }
-}
 
+
+    public static void exercise4() {
+        System.out.println("**********************************");
+        System.out.println("*   Lancement de l'exercice 4    *");
+        System.out.println("**********************************");
+
+        String choice;
+
+        do {
+            choice = calculProduit();
+        } while (choice.equalsIgnoreCase("y"));
+    }
+
+    private static String calculProduit() {
+        // Définition des constantes pour le nombre de lignes et de colonnes
+        final int LIGNES = 10;
+        final int COLONNES = 10;
+
+        // Déclaration et initialisation du tableau à 2 dimensions de 9x9
+        int[][] tabMultiplication = new int[LIGNES][COLONNES];
+
+        // Remplir le tableau avec les produits de multiplication
+        for (int i = 1; i < tabMultiplication.length; i++) {
+            for (int j = 1; j < tabMultiplication[i].length; j++) {
+                tabMultiplication[i][j] = i * j;
+            }
+        }
+
+        // Affichage du tableau 2D, en ignorant la ligne et la colonne 0
+        for (int i = 1; i < LIGNES; i++) {
+            for (int j = 1; j < COLONNES; j++) {
+                System.out.print(tabMultiplication[i][j] + "\t");
+            }
+            System.out.println();
+        }
+
+        // Saisie de x et y par l'utilisateur
+        Scanner scanner = new Scanner(System.in);
+        int x, y;
+
+        do {
+            System.out.println("Entrez la valeur de X (entier de 1 à 9) : ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Veuillez entrer un entier !");
+                scanner.nextLine();
+            }
+            x = scanner.nextInt();
+        } while (x < 1 || x > 9);
+
+        do {
+            System.out.println("Entrez la valeur de Y (entier de 1 à 9) : ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Veuillez entrer un entier !");
+                scanner.nextLine();
+            }
+            y = scanner.nextInt();
+        } while (y < 1 || y > 9);
+
+        // Affichage de la valeur à l'intersection de X et Y
+        int valeur = tabMultiplication[x][y];
+        System.out.println("Le résultat de " + x + " X " + y + " = " + valeur);
+
+        // On demande à l'utilisateur s'il souhaite relancer le programme
+        scanner.nextLine();
+        System.out.println("Souhaitez-vous encore un calcul ? y pour oui ou n pour non");
+        String choice = scanner.nextLine();
+
+        if (!choice.equalsIgnoreCase("y") && !choice.equalsIgnoreCase("n")) {
+            System.out.println("Choix invalide, le programme va s'arrêter.");
+            return "n";
+        }
+
+        return choice;
+    }
+}
 
