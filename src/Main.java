@@ -23,6 +23,9 @@ public class Main {
             case 4:
                 exercise4();
                 break;
+            case 5:
+                exercise5();
+                break;
             default:
                 System.out.println("Numéro d'exercice invalide");
                 break;
@@ -148,7 +151,7 @@ public class Main {
     }
 
     // Fonction de recherche dichotomique
-    public static int rechercherEntier(int[] tab, int x) {
+    private static int rechercherEntier(int[] tab, int x) {
         int gauche = 0;
         int droite = tab.length - 1;
 
@@ -238,8 +241,89 @@ public class Main {
             System.out.println("Choix invalide, le programme va s'arrêter.");
             return "n";
         }
+        scanner.close();
 
         return choice;
+
+    }
+
+
+    public static void exercise5() {
+        System.out.println("**********************************");
+        System.out.println("*   Lancement de l'exercice 5    *");
+        System.out.println("**********************************");
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Veuillez renseigner la taille du tableau : ");
+        int TAILLE_MAX = scanner.nextInt();
+
+        int[] tableau = new int[TAILLE_MAX];
+
+        // Remplissage du tableau avec des valeurs aléatoires positives et négatives comprises entre -500 et 499
+        for (int i = 0; i < TAILLE_MAX; i++) {
+            tableau[i] = (int) (Math.random() * 1000) - 500;
+        }
+
+        // Affichage des valeurs du tableau avant tri
+        System.out.println("Contenu du tableau avant tri : " + Arrays.toString(tableau));
+
+        // Demander à l'utilisateur de trier par ordre croissant ou décroissant
+        scanner.nextLine(); // Consommer le saut de ligne restant
+        String choice;
+        while (true) {
+            System.out.println("Voulez-vous trier par ordre croissant ou décroissant ? Tapez \"asc\" pour croissant ou \"desc\" pour décroissant : ");
+            choice = scanner.nextLine().trim().toLowerCase();
+            if (choice.equals("asc") || choice.equals("desc")) {
+                break;
+            } else {
+                System.out.println("Choix invalide : " + choice);
+            }
+        }
+
+        // Tri du tableau par ordre croissant ou décroissant
+        // L'IDE a optimisé la structure du switch par une notation plus concise
+        int[] tableauTrie = switch (choice) {
+            case "asc" -> trierTableau(tableau, true);
+            case "desc" -> trierTableau(tableau, false);
+            default ->tableau;
+        };
+
+        // Affichage des valeurs du tableau après tri
+        System.out.println("Tableau après tri : " + Arrays.toString(tableauTrie));
+
+        scanner.close();
+    }
+
+    // Déclaration de la fonction trierTableau() utilisant le tri par insertion
+    private static int[] trierTableau(int[] tab, boolean asc) {
+        for (int i = 1; i < tab.length; i++) {
+            int current = tab[i];
+            int j = i;
+
+            // Boucle pour déplacer les éléments selon l'ordre choisi
+            while (j > 0 && (asc ? current < tab[j - 1] : current > tab[j - 1])) {
+                tab[j] = tab[j - 1];
+                j--;
+            }
+            tab[j] = current;
+        }
+        return tab;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
